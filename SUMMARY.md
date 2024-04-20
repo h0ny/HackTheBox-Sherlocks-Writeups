@@ -6,3 +6,5 @@
 
 * [DFIR](dfir/dfir/README.md)
   * [Unit42](dfir/dfir/unit42.md)
+  * [Brutus](dfir/Brutus/README.md)
+
