@@ -11,7 +11,15 @@
   * [Page](dfir/dfir/page.md)
   * [Meerkat](dfir/dfir/meerkat.md)
   * [Copy of Meerkat](dfir/dfir/copy-of-meerkat.md)
+* [Cloud](dfir/cloud.md)
+* [Campaign](dfir/campaign.md)
+
+## &#x20;SOC - Security Operations Center
+
+* [SOC](soc-security-operations-center/soc.md)
 
 ***
 
+* [Threat Intelligence](threat-intelligence.md)
+* [Malware Analysis](malware-analysis.md)
 * [GitHub](https://github.com/h0ny/HackTheBox-Sherlocks-Writeups)

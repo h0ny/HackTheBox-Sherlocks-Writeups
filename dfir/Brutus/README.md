@@ -1,3 +1,23 @@
+---
+cover: >-
+  https://labs.hackthebox.com/storage/challenges/b7bb35b9c6ca2aee2df08cf09d7016c2.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: full
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # Brutus
 
 ## Sherlock Scenario
