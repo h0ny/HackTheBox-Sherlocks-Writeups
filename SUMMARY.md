@@ -8,6 +8,9 @@
   * [Unit42](dfir/dfir/unit42.md)
   * [Brutus](dfir/Brutus/README.md)
   * [Page 1](dfir/dfir/page-1.md)
+  * [Page](dfir/dfir/page.md)
+  * [Meerkat](dfir/dfir/meerkat.md)
+  * [Copy of Meerkat](dfir/dfir/copy-of-meerkat.md)
 
 ***
 
