@@ -32,6 +32,6 @@
 
 * [Malware Analysis](malware-analysis/malware-analysis.md)
 
-***
+## About
 
 * [GitHub](https://github.com/h0ny/HackTheBox-Sherlocks-Writeups)
