@@ -1,5 +1,8 @@
 # Table of contents
 
-* [HackTheBox-Sherlocks-Writeups](README.md)
-* [DFIR](dfir/README.md)
-  * [Unit42](dfir/unit42.md)
+* [Introduction](README.md)
+
+## DFIR - Digital Forensics and Incident Response <a href="#dfir" id="dfir"></a>
+
+* [DFIR](dfir/dfir/README.md)
+  * [Unit42](dfir/dfir/unit42.md)
