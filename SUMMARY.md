@@ -4,17 +4,17 @@
 
 ## DFIR - Digital Forensics and Incident Response <a href="#digital-forensics-and-incident-response" id="digital-forensics-and-incident-response"></a>
 
-* [DFIR](digital-forensics-and-incident-response/dfir/README.md)
-  * [Unit42](digital-forensics-and-incident-response/dfir/unit42.md)
-  * [Brutus](digital-forensics-and-incident-response/dfir/brutus.md)
-  * [Page 1](digital-forensics-and-incident-response/dfir/page-1.md)
-  * [Page](digital-forensics-and-incident-response/dfir/page.md)
-  * [Meerkat](digital-forensics-and-incident-response/dfir/meerkat.md)
-  * [Copy of Meerkat](digital-forensics-and-incident-response/dfir/copy-of-meerkat.md)
+* [DFIR](dfir/dfir/README.md)
+  * [Unit42](dfir/dfir/unit42.md)
+  * [Brutus](dfir/Brutus/README.md)
+  * [Page 1](dfir/dfir/page-1.md)
+  * [Page](dfir/dfir/page.md)
+  * [Meerkat](dfir/dfir/meerkat.md)
+  * [Copy of Meerkat](dfir/dfir/copy-of-meerkat.md)
 
-## &#x20;SOC - Security Operations Center
+## &#x20;SOC - Security Operations Center <a href="#security-operations-center" id="security-operations-center"></a>
 
-* [SOC](soc-security-operations-center/soc.md)
+* [SOC](security-operations-center/soc.md)
 
 ## Campaign
 

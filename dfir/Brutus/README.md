@@ -132,7 +132,7 @@ SSH login sessions are tracked and assigned a session number upon login. What is
 
 ***
 
-![image-20240417233128725](../../dfir/Brutus/README.assets/image-20240417233128725.png)
+![image-20240417233128725](README.assets/image-20240417233128725.png)
 
 `37`
 
@@ -172,7 +172,7 @@ What is the MITRE ATT\&CK sub-technique ID used for persistence?
 
 https://attack.mitre.org/techniques/T1136/001/
 
-![image-20240417232625091](../../dfir/Brutus/README.assets/image-20240417232625091.png)
+![image-20240417232625091](README.assets/image-20240417232625091.png)
 
 `T1136.001`
 
