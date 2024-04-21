@@ -1,7 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Tools](tools.md)
+* [Tools](tools/README.md)
 
 ## DFIR - Digital Forensics and Incident Response <a href="#digital-forensics-and-incident-response" id="digital-forensics-and-incident-response"></a>
 
