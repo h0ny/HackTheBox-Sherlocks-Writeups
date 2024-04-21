@@ -6,6 +6,7 @@
 
 * [DFIR](digital-forensics-and-incident-response/dfir/README.md)
   * [Unit42](digital-forensics-and-incident-response/dfir/unit42.md)
+  * [Brutus](digital-forensics-and-incident-response/dfir/brutus.md)
 
 ## &#x20;SOC - Security Operations Center <a href="#security-operations-center" id="security-operations-center"></a>
 
