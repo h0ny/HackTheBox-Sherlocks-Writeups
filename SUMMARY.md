@@ -4,8 +4,8 @@
 
 ## DFIR - Digital Forensics and Incident Response <a href="#digital-forensics-and-incident-response" id="digital-forensics-and-incident-response"></a>
 
-* [DFIR](dfir/dfir/README.md)
-  * [Unit42](dfir/dfir/unit42.md)
+* [DFIR](digital-forensics-and-incident-response/dfir/README.md)
+  * [Unit42](digital-forensics-and-incident-response/dfir/unit42.md)
 
 ## &#x20;SOC - Security Operations Center <a href="#security-operations-center" id="security-operations-center"></a>
 
